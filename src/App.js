@@ -7,6 +7,8 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "./Components/PrivateRoute"
+import CharacterList from './Components/CharacterList';
+
 
 class App extends React.Component{ 
   
@@ -16,10 +18,11 @@ class App extends React.Component{
         <Router>
           <AuthProvider>
             <Switch>
-              <PrivateRoute exact path="/" component={Chat} />
+              <PrivateRoute exact path="/" component={CharacterList} />
               <Route path="/character" component={Character} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
+              <Route path="/chat" component={Chat}/>
               {/* <Route path="/forgot-password" component={ForgotPassword} /> */}
             </Switch>
           </AuthProvider>

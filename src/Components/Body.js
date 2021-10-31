@@ -4,6 +4,7 @@ import '../ComponentsView/Body.css'
 import { db } from "../firebase"
 import { useAuth } from "../context/AuthContext"
 import { useHistory } from "react-router-dom"
+import {Avatar, Button, Container, Grid} from "@material-ui/core";
 
 export default function Signup() {
 
@@ -12,6 +13,7 @@ export default function Signup() {
   const [id, setId] = useState([])
   const [ loading, setLoading ] = useState(true);
   const history = useHistory()
+  
 
  async function  getData() {
     await db.collection("users").doc(getuid()).collection('characters').get().then(docs => {
@@ -27,6 +29,10 @@ export default function Signup() {
         setLoading(false);
       }
     });
+  }
+
+  function toChatRooms(){
+    history.push('/chat')
   }
 
   useEffect(() => {
@@ -49,20 +55,21 @@ export default function Signup() {
               </h4>
             </Col>
             <Col>
-              <h6>
-                Level: {item.Lvl}
-              </h6>
-              <button onClick = {() => {history.push({ 
+              <Button onClick = {() => {history.push({ 
                 pathname: "/character",
                 state: {id : id[i]}
               })}}>
                   to Character
-              </button>
+              </Button>
+              <Button onClick={toChatRooms}>To chat room</Button>
             </Col>
           </Row>
         </div>
         <div class = 'card-body'>
           HP: {item.HP}
+          <h6>
+            Level: {item.Lvl}
+          </h6>
         </div>
       </Card>})}
     </div>

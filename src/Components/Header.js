@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
+import {Avatar, Button, Container, Grid} from "@material-ui/core";
 
 
   export default function Header() {
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const [ error, setError] = useState("")
+  const {  logout } = useAuth()
   const history = useHistory()
 
   async function handleLogout() {
@@ -19,9 +19,16 @@ import { Link, useHistory } from "react-router-dom"
       setError("Failed to log out")
     }
   }
+
+  function toCharacterList(){
+    history.push('/')
+  }
+
+
   return <div>
-    <h2>My Pathfinder characters list</h2>
-      <button variant="link" onClick={handleLogout}>Sigh Out</button>
+      <Button onClick={toCharacterList}>To my characters</Button>
+      <Button>Become DM</Button>
+      <Button variant="link" onClick={handleLogout}>Sigh Out</Button>
   </div>
 }
 
