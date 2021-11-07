@@ -31,13 +31,9 @@ export default function Signup() {
     });
   }
 
-  function toChatRooms(){
-    history.push('/chat')
-  }
-
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   if(loading){
     return <div class ="justify-content-md-center">Loading...</div>
@@ -61,7 +57,6 @@ export default function Signup() {
               })}}>
                   to Character
               </Button>
-              <Button onClick={toChatRooms}>To chat room</Button>
             </Col>
           </Row>
         </div>

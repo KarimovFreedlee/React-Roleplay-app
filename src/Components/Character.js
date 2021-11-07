@@ -17,7 +17,7 @@ export default function Character() {
     const [classesData, setClassesData] = useState({})
     const [classesLoading, setClassesLoading ] = useState(true);
     const [characterClass, setCharacterClass] = useState('')
-    const history = useHistory()
+
 
     async function getCharacterData(){
         await db.collection("users").doc(getuid()).collection('characters').doc(location.state.id).get().then(doc => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Header from './Header'
 import { auth, db } from "../firebase"
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"
 import TextField from "@material-ui/core/TextField";
 import {Avatar, Button, Container, Grid} from "@material-ui/core";
@@ -8,22 +9,22 @@ import {useCollectionData} from "react-firebase-hooks/firestore";
 import firebase from "firebase";
 
 export default function Chat() {
-
+    
+    const { getuid } = useAuth()  
+    const location = useLocation(); 
     const [value, setValue] = useState('')
-    const [user, setUser] = useState([])
+    const [userId, setUserId] = useState('')
     const [messages, loading] = useCollectionData(
-        db.collection('messages').orderBy('createdAt')
+        db.collection('rooms').doc(location.state.id).collection('messages').orderBy('createdAt')
     )
-    const { currentUser } = useAuth()
-
 
     useEffect(() => {
-        console.log(messages)
-      },[]);
+        setUserId (getuid())
+      });
 
     const sendMessage = async () => {
-        db.collection('messages').add({
-            // uid: user.uid,
+        db.collection('rooms').doc(location.state.id).collection('messages').add({
+            uid: userId,
             // displayName: userNAME,
             // photoURL: user.photoURL,
             text: value,
@@ -47,8 +48,8 @@ export default function Chat() {
                     {messages.map(message =>
                         <div style={{
                             margin: 10,
-                            border: user.uid === message.uid ? '2px solid green' : '2px dashed red',
-                            marginLeft: user.uid === message.uid ? 'auto' : '10px',
+                            border: userId === message.uid ? '2px solid green' : '2px dashed red',
+                            marginLeft: userId === message.uid ? 'auto' : '10px',
                             width: 'fit-content',
                             padding: 5,
                         }}>

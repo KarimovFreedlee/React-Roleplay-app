@@ -8,6 +8,7 @@ import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "./Components/PrivateRoute"
 import CharacterList from './Components/CharacterList';
+import ChatRoomList from './Components/ChatRoomList';
 
 
 class App extends React.Component{ 
@@ -23,6 +24,7 @@ class App extends React.Component{
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/chat" component={Chat}/>
+              <Route path ="/chat_list" component={ChatRoomList}/>
               {/* <Route path="/forgot-password" component={ForgotPassword} /> */}
             </Switch>
           </AuthProvider>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from "../context/AuthContext"
 import {  useHistory } from "react-router-dom"
 import {Avatar, Button, Container, Grid} from "@material-ui/core";
+import { db } from "../firebase"
 
 
   export default function Header() {
@@ -24,10 +25,16 @@ import {Avatar, Button, Container, Grid} from "@material-ui/core";
     history.push('/')
   }
 
+  function toChatList(){
+    history.push('/chat_list')
+  }
+
+  
+
 
   return <div>
       <Button onClick={toCharacterList}>To my characters</Button>
-      <Button>Become DM</Button>
+      <Button onClick={toChatList}>Become DM</Button>
       <Button variant="link" onClick={handleLogout}>Sigh Out</Button>
   </div>
 }
