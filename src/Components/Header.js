@@ -34,7 +34,7 @@ import { db } from "../firebase"
 
   return <div>
       <Button onClick={toCharacterList}>To my characters</Button>
-      <Button onClick={toChatList}>Become DM</Button>
+      <Button onClick={toChatList}>To chat rooms</Button>
       <Button variant="link" onClick={handleLogout}>Sigh Out</Button>
   </div>
 }
