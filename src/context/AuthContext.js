@@ -93,6 +93,15 @@ export function AuthProvider({ children }) {
     return chatRoomList
   }
 
+  async function addChatRoom(){
+    let roomName = prompt('enter room name')
+    let roomPassword = prompt('enter room password')
+    await db.collection('rooms').add({
+      ROOMNAME: roomName,
+      ROOMPASSWORD : roomPassword
+    })
+}
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
@@ -113,7 +122,8 @@ export function AuthProvider({ children }) {
     updatePassword,
     getCharacters,
     getCharacterData,
-    getChatRoomsList
+    getChatRoomsList,
+    addChatRoom
   }
 
   return (
