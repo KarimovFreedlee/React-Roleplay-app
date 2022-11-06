@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
-import Header from './../Header'
-import { auth, db } from "../../firebase"
+import React, { useState, useEffect, useRef } from "react"
+import { db } from "../../firebase"
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext"
 import TextField from "@material-ui/core/TextField";
@@ -14,9 +13,14 @@ export default function Chat() {
     const location = useLocation(); 
     const [value, setValue] = useState('')
     const [userId, setUserId] = useState('')
+    const messageRef = React.createRef()
     const [messages, loading] = useCollectionData(
         db.collection('rooms').doc(location.state.id).collection('messages').orderBy('createdAt')
     )
+
+    useEffect(() => {
+        messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: "nearest" })
+    },[messages]);
 
     useEffect(() => {
         setUserId (getuid())
@@ -39,7 +43,7 @@ export default function Chat() {
             <Grid container
                   justify={"center"}
                   style={{height: window.innerHeight - 50, marginTop: 20}}>
-                <div style={{width: '80%', height: '60vh', border: '1px solid gray', overflowY: 'auto'}}>
+                <div style={{width: '80%', height: '80vh', border: '1px solid gray', overflowY: 'auto'}}>
                     {messages.map((message, i) =>
                         <div 
                             key={i}
@@ -54,7 +58,7 @@ export default function Chat() {
                                 <Avatar src={message.photoURL}/>
                                 <div>{message.NAME}</div>
                             </Grid>
-                            <div>{message.text}</div>
+                            <div ref={messageRef}>{message.text}</div>
                         </div>
                     )}
                 </div>

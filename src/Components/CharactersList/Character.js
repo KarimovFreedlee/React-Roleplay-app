@@ -1,34 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom";
-import { db } from "../../firebase"
 import { useAuth } from "../../context/AuthContext"
-import { useHistory } from "react-router-dom"
 import Abilitys from './Abilitys'
 import Skills from './Skills'
-import Header from '../Header'
 
 
 export default function Character() {
 
-    const { getuid, getCharacterData } = useAuth() 
+    const { getCharacterData } = useAuth() 
     const location = useLocation();
     const [data, setData] = useState({})
     const [dataLoading, setDataLoading] = useState(true)
-    const [classesData, setClassesData] = useState({})
-    const [classesLoading, setClassesLoading ] = useState(true);
-    const [characterClass, setCharacterClass] = useState('')
-
-    async function getClassesData(characterClass){
-        await db.collection("classes").doc(characterClass).get().then(doc => {
-            if(doc.exists){
-                setClassesData(doc.data())
-                if(classesLoading){
-                    setClassesLoading(false)
-                    console.log('classes loaded')
-                }
-            } else console.log('classes dont find')
-        })
-    }
 
     function modifier (val){
         if(val == null || val.isEmpty){
