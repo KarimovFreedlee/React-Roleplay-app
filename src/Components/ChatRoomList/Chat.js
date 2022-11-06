@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import Header from './Header'
-import { auth, db } from "../firebase"
+import Header from './../Header'
+import { auth, db } from "../../firebase"
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"
+import { useAuth } from "../../context/AuthContext"
 import TextField from "@material-ui/core/TextField";
 import {Avatar, Button, Container, Grid} from "@material-ui/core";
 import {useCollectionData} from "react-firebase-hooks/firestore";

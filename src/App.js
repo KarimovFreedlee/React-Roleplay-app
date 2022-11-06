@@ -1,14 +1,14 @@
 import React from 'react';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
-import Chat from './Components/Chat';
-import Character from './Components/Character'
+import Login from './Components/SignUp/Login';
+import Signup from './Components/SignUp/Signup';
+import Chat from './Components/ChatRoomList/Chat';
+import Character from './Components/CharactersList/Character'
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "./Components/PrivateRoute"
-import CharacterList from './Components/CharacterList';
-import ChatRoomList from './Components/ChatRoomList';
+import CharacterList from './Components/CharactersList/CharacterList';
+import ChatRoomList from './Components/ChatRoomList/ChatRoomList';
 
 
 class App extends React.Component{ 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Card, Row, Col } from "react-bootstrap"
-import '../ComponentsView/Body.css'
+import '../../ComponentsView/Body.css'
 import { useAuth } from "../../context/AuthContext"
 import { useHistory } from "react-router-dom"
 import { Button } from "@material-ui/core";
