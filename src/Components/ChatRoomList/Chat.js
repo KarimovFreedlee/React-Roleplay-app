@@ -14,7 +14,7 @@ export default function Chat() {
     const location = useLocation(); 
     const [value, setValue] = useState('')
     const [userId, setUserId] = useState('')
-    const messageRef = React.createRef()
+    const messageRef = useRef()
     const [messages, loading] = useCollectionData(
         db.collection('rooms').doc(location.state.id).collection('messages').orderBy('createdAt')
     )
@@ -64,23 +64,23 @@ export default function Chat() {
                         </div>
                     )}
                 </div>
-                <Form onSubmit={sendMessage}>
                     <Grid
                         container
                         direction={"column"}
                         alignItems={"flex-end"}
                         style={{width: '80%'}}
                     >
-                        <TextField
-                            fullWidth
-                            rowsMax={2}
-                            variant={"outlined"}
-                            value={value}
-                            onChange={e => setValue(e.target.value)}
-                        />
-                        <Button variant={"outlined"} type = 'submit'>Send</Button>
+                        <Form onSubmit={sendMessage}>
+                            <TextField
+                                fullWidth
+                                rowsMax={2}
+                                variant={"outlined"}
+                                value={value}
+                                onChange={e => setValue(e.target.value)}
+                            />
+                            <Button variant={"outlined"} type = 'submit'>Send</Button>
+                        </Form>
                     </Grid>
-                </Form>
             </Grid>
         </Container>
     )
