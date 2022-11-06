@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "./Components/PrivateRoute"
 import CharacterList from './Components/CharactersList/CharacterList';
 import ChatRoomList from './Components/ChatRoomList/ChatRoomList';
+import Header from './Components/Header';
 
 
 class App extends React.Component{ 
@@ -18,6 +19,7 @@ class App extends React.Component{
       <div>
         <Router>
           <AuthProvider>
+            <Header/>
             <Switch>
               <PrivateRoute exact path="/" component={CharacterList} />
               <Route path="/character" component={Character} />

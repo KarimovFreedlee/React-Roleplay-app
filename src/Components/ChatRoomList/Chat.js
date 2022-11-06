@@ -36,7 +36,6 @@ export default function Chat() {
     return (
         loading ? <h3>loading</h3> :
         <Container>
-            <Header/>
             <Grid container
                   justify={"center"}
                   style={{height: window.innerHeight - 50, marginTop: 20}}>

@@ -50,17 +50,17 @@ export default function Character() {
             async function (){
                 const characterData = await getCharacterData(location.state.id)
                 setData(characterData)
+                console.log(characterData)  
                 setDataLoading(false)
             }
-        )()        
-    });
+        )()   
+    },[]);
 
     if(dataLoading)
         return <h1>Loading</h1>
 
     return (
         <div>
-            <Header/>
             <Abilitys firstColumn = 'Name' secondColumn = 'Score' thirdColumn = 'Modify'/>
             <Abilitys firstColumn = 'STR' secondColumn = {data.STR} thirdColumn = {modifier(data.STR)}/>
             <Abilitys firstColumn = 'DEX' secondColumn = {data.DEX} thirdColumn = {modifier(data.DEX)}/>

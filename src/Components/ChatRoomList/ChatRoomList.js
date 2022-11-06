@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext"
 export default function ChatRoomList() {
 
     const history = useHistory()
-    const { getChatRoomsList, addChatRoom } = useAuth()
+    const { getChatRoomsList, createChatRoom } = useAuth()
     const [chatRooms, setChatRooms] = useState([])
     const [ loading, setLoading ] = useState(true);
     
@@ -27,13 +27,12 @@ export default function ChatRoomList() {
     }
 
     const newChatRoom = () => {
-        addChatRoom()
+        createChatRoom()
     }
        
     return(
         loading ? <div className ="justify-content-md-center">Loading...</div> :
         <div>
-            <Header/>
             {chatRooms.map(room => { 
             return <Card 
                 key = {room.roomId}
