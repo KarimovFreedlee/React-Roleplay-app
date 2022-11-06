@@ -20,7 +20,7 @@ export default function Chat() {
 
     useEffect(() => {
         setUserId (getuid())
-      });
+    },[]);
 
     const sendMessage = async () => {
         db.collection('rooms').doc(location.state.id).collection('messages').add({
@@ -33,12 +33,8 @@ export default function Chat() {
         setValue('')
     }
 
-    if(loading){
-        return <h3>loading</h3>
-    }
-
-
     return (
+        loading ? <h3>loading</h3> :
         <Container>
             <Header/>
             <Grid container

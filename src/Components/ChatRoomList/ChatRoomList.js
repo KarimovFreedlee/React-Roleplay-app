@@ -35,19 +35,19 @@ export default function ChatRoomList() {
         <div>
             <Header/>
             {chatRooms.map(room => { 
-            return <Card key = {room.roomId} >
+            return <Card 
+                key = {room.roomId}
+                onClick = {() => {history.push({ 
+                    pathname: "/chat",
+                    state: {id : room.roomId}
+                })}}
+                >
                 <div className = 'card-header'>
                     <Row>
                     <Col>
                         <h4>
                         {room.data.ROOMNAME} 
                         </h4>
-                    </Col>
-                    <Col>
-                        <Button onClick = {() => {history.push({ 
-                            pathname: "/chat",
-                            state: {id : room.roomId}
-                        })}}>To chat room</Button>
                     </Col>
                     </Row>
                 </div>

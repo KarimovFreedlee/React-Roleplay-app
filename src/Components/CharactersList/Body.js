@@ -26,30 +26,28 @@ export default function Signup() {
     loading ? <div className ="justify-content-md-center">Loading...</div> : 
     <div>
       {characters.map(item => { 
-        return <Card key = {item.characterId} >
-        <div className = 'card-header'>
-          <Row>
-            <Col>
-              <h4>
-                {item.data.name} 
-              </h4>
-            </Col>
-            <Col>
-              <Button onClick = {() => {history.push({ 
-                pathname: "/character",
-                state: {id : item.characterId}
-              })}}>
-                  to Character
-              </Button>
-            </Col>
-          </Row>
-        </div>
-        <div className = 'card-body'>
-          HP: {item.data.HP}
-          <h6>
-            Level: {item.data.Lvl}
-          </h6>
-        </div>
+        return <Card 
+        key = {item.characterId}
+        onClick = {() => {history.push({ 
+          pathname: "/character",
+          state: {id : item.characterId}
+        })}}
+        >
+          <div className = 'card-header'>
+            <Row>
+              <Col>
+                <h4>
+                  {item.data.name} 
+                </h4>
+              </Col>
+            </Row>
+          </div>
+          <div className = 'card-body'>
+            HP: {item.data.HP}
+            <h6>
+              Level: {item.data.Lvl}
+            </h6>
+          </div>
       </Card>})}
     </div>
   )
