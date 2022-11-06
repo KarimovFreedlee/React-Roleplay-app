@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import {Avatar, Button, Container, Grid} from "@material-ui/core";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import firebase from "firebase";
+import { Form } from "react-bootstrap";
 
 export default function Chat() {
     
@@ -26,7 +27,8 @@ export default function Chat() {
         setUserId (getuid())
     },[]);
 
-    const sendMessage = async () => {
+    const sendMessage = async (e) => {
+        e.preventDefault()
         db.collection('rooms').doc(location.state.id).collection('messages').add({
             uid: userId,
             // displayName: userNAME,
@@ -62,21 +64,23 @@ export default function Chat() {
                         </div>
                     )}
                 </div>
-                <Grid
-                    container
-                    direction={"column"}
-                    alignItems={"flex-end"}
-                    style={{width: '80%'}}
-                >
-                    <TextField
-                        fullWidth
-                        rowsMax={2}
-                        variant={"outlined"}
-                        value={value}
-                        onChange={e => setValue(e.target.value)}
-                    />
-                    <Button onClick={sendMessage} variant={"outlined"}>Send</Button>
-                </Grid>
+                <Form onSubmit={sendMessage}>
+                    <Grid
+                        container
+                        direction={"column"}
+                        alignItems={"flex-end"}
+                        style={{width: '80%'}}
+                    >
+                        <TextField
+                            fullWidth
+                            rowsMax={2}
+                            variant={"outlined"}
+                            value={value}
+                            onChange={e => setValue(e.target.value)}
+                        />
+                        <Button variant={"outlined"} type = 'submit'>Send</Button>
+                    </Grid>
+                </Form>
             </Grid>
         </Container>
     )
