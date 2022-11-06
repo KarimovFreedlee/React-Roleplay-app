@@ -45,8 +45,10 @@ export default function Chat() {
                   justify={"center"}
                   style={{height: window.innerHeight - 50, marginTop: 20}}>
                 <div style={{width: '80%', height: '60vh', border: '1px solid gray', overflowY: 'auto'}}>
-                    {messages.map(message =>
-                        <div style={{
+                    {messages.map((message, i) =>
+                        <div 
+                            key={i}
+                            style={{
                             margin: 10,
                             border: userId === message.uid ? '2px solid green' : '2px dashed red',
                             marginLeft: userId === message.uid ? 'auto' : '10px',

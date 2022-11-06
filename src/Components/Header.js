@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from "../context/AuthContext"
 import {  useHistory } from "react-router-dom"
-import {Avatar, Button, Container, Grid} from "@material-ui/core";
-import { db } from "../firebase"
+import { Button } from "@material-ui/core";
 
 
   export default function Header() {

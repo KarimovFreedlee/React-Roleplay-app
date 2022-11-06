@@ -59,7 +59,7 @@ export function AuthProvider({ children }) {
     return characters
   }
 
-  async function getCharacterData(characterId){
+  async function getCharacterData(characterId) {
     
     let data
 
@@ -72,6 +72,25 @@ export function AuthProvider({ children }) {
     })
 
     return data
+  }
+
+  async function getChatRoomsList() {
+
+    const chatRoomList = []
+
+    await db.collection("rooms").get().then(docs => {
+      docs.forEach(doc => {
+
+        const chatRoom = {
+          "roomId": doc.id,
+          "data": doc.data()
+        }
+
+        chatRoomList.push(chatRoom)
+      })
+    })
+
+    return chatRoomList
   }
 
   useEffect(() => {
@@ -93,7 +112,8 @@ export function AuthProvider({ children }) {
     updateEmail,
     updatePassword,
     getCharacters,
-    getCharacterData
+    getCharacterData,
+    getChatRoomsList
   }
 
   return (

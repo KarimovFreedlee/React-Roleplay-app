@@ -20,14 +20,12 @@ export default function Signup() {
         setLoading(false)
       }
     )()
-  });
-
-  if(loading)
-    return <div className ="justify-content-md-center">Loading...</div>
+  }, []);
 
   return(
+    loading ? <div className ="justify-content-md-center">Loading...</div> : 
     <div>
-      {characters.map((item,i) => { 
+      {characters.map(item => { 
         return <Card key = {item.characterId} >
         <div className = 'card-header'>
           <Row>
