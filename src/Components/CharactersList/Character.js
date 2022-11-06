@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { db } from "../../firebase"
 import { useAuth } from "../../context/AuthContext"
 import { useHistory } from "react-router-dom"
-import Abilitys from '../Abilitys'
-import Skills from '../Skills'
+import Abilitys from './Abilitys'
+import Skills from './Skills'
 import Header from '../Header'
 
 
