@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import Header from '../Header'
 import { Card, Row, Col } from "react-bootstrap"
 import {Button} from "@material-ui/core"
 import { useHistory } from "react-router-dom"
