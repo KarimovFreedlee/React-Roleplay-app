@@ -10,27 +10,13 @@ import Header from './Header'
 
 export default function Character() {
 
-    const { getuid } = useAuth() 
+    const { getuid, getCharacterData } = useAuth() 
     const location = useLocation();
     const [data, setData] = useState({})
     const [dataLoading, setDataLoading] = useState(true)
     const [classesData, setClassesData] = useState({})
     const [classesLoading, setClassesLoading ] = useState(true);
     const [characterClass, setCharacterClass] = useState('')
-
-
-    async function getCharacterData(){
-        await db.collection("users").doc(getuid()).collection('characters').doc(location.state.id).get().then(doc => {
-            if(doc.exists) {
-                setData(doc.data())
-                getClassesData(doc.data().class)
-                if(dataLoading){
-                    setDataLoading(false)
-                    console.log('data loaded')
-                }
-            } else console.log('doc does not exist')
-        })
-    }
 
     async function getClassesData(characterClass){
         await db.collection("classes").doc(characterClass).get().then(doc => {
@@ -42,7 +28,6 @@ export default function Character() {
                 }
             } else console.log('classes dont find')
         })
-
     }
 
     function modifier (val){
@@ -61,12 +46,17 @@ export default function Character() {
     }
 
     useEffect(() => {
-        getCharacterData()
-    },[]);
+        (
+            async function (){
+                const characterData = await getCharacterData(location.state.id)
+                setData(characterData)
+                setDataLoading(false)
+            }
+        )()        
+    });
 
-    if( classesLoading || dataLoading){
+    if(dataLoading)
         return <h1>Loading</h1>
-    }
 
     return (
         <div>

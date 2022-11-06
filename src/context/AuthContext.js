@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase"
+import { db } from "../firebase"
 
 const AuthContext = React.createContext()
 
@@ -8,6 +9,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
@@ -39,6 +41,39 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password)
   }
 
+  async function getCharacters() {
+
+    const characters = []
+
+    await db.collection("users").doc(getuid()).collection('characters').get().then(docs => {
+      docs.forEach(doc => {
+
+        const character = {
+          "characterId": doc.id,
+          "data": doc.data()
+        }
+        characters.push(character)
+      });
+    });
+
+    return characters
+  }
+
+  async function getCharacterData(characterId){
+    
+    let data
+
+    await db.collection("users").doc(getuid()).collection('characters').doc(characterId).get().then(doc => {
+        if(doc.exists){
+          data = doc.data()
+        }
+        else 
+          console.log('doc does not exist')
+    })
+
+    return data
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
@@ -56,7 +91,9 @@ export function AuthProvider({ children }) {
     getuid,
     resetPassword,
     updateEmail,
-    updatePassword
+    updatePassword,
+    getCharacters,
+    getCharacterData
   }
 
   return (

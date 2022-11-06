@@ -42,7 +42,7 @@ export default function ChatRoomList() {
     });
     
     if(loading){
-        return <div class ="justify-content-md-center">Loading...</div>
+        return <div className ="justify-content-md-center">Loading...</div>
     }
 
     
@@ -51,7 +51,7 @@ export default function ChatRoomList() {
             <Header/>
             {chatRoom.map((item,i) => { 
             return <Card key= {id[i]} >
-            <div class='card-header'>
+            <div className = 'card-header'>
                 <Row>
                 <Col>
                     <h4>
