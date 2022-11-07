@@ -1,0 +1,18 @@
+.listItem {
+    height: 4vw;
+    background: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    margin-bottom: 1px;
+
+}
+
+.active{
+    background: white;
+}
+
+.listItem:hover {
+    background: white;
+}

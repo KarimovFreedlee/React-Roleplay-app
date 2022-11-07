@@ -62,8 +62,21 @@ export function AuthProvider({ children }) {
   async function getCharacterData(characterId) {
     
     let data
-
     await db.collection("users").doc(getuid()).collection('characters').doc(characterId).get().then(doc => {
+        if(doc.exists){
+          data = doc.data()
+        }
+        else 
+          console.log('doc does not exist')
+    })
+
+    return data
+  }
+
+  async function getClassesData(className) {
+    
+    let data
+    await db.collection("classes").doc(className).get().then(doc => {
         if(doc.exists){
           data = doc.data()
         }
@@ -104,7 +117,13 @@ export function AuthProvider({ children }) {
 
   async function createCharacter(character){
     await db.collection("users").doc(getuid()).collection('characters').add({
-      NAME: character.name
+      NAME: character.name,
+      RACE: character.race,
+      LEVEL_UP: true,
+      // SKILL_RANKS: character.skillRanks,
+      // HP: character.hp,
+      // CLASS: character.class,
+      // ABILITIES: character.abilities
     })
   }
 
@@ -130,7 +149,8 @@ export function AuthProvider({ children }) {
     getCharacterData,
     getChatRoomsList,
     createChatRoom,
-    createCharacter
+    createCharacter,
+    getClassesData
   }
 
   return (

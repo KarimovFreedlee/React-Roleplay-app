@@ -42,7 +42,7 @@ export default function Signup() {
             <Row>
               <Col>
                 <h4>
-                  {character.data.name} 
+                  {character.data.NAME} 
                 </h4>
               </Col>
             </Row>

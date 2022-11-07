@@ -10,4 +10,50 @@
 
 .characterCreating-modal {
     align-self: center;
+    width: 35%;
+    height: 65%;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 100%;
+}
+
+.characterCreating-dropdown {
+   margin: 15px;
+}
+
+.listItem {
+    background: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    margin-bottom: 1px;
+    cursor: default;
+    height: 40px;
+    /* position: relative; */
+}
+
+.listItem:hover {
+    background: white;
+}
+
+.active{
+    background: white;
+}
+
+.characterCreating-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.characterCreating-buttons button {
+    margin: 10px;
+}
+
+.characterCreating-img img {
+    width: 100%;
+    /* position: relative; */
+    height: 100%;
+    object-fit: cover;
 }
