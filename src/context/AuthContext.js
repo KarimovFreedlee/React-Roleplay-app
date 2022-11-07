@@ -104,8 +104,7 @@ export function AuthProvider({ children }) {
 
   async function createCharacter(character){
     await db.collection("users").doc(getuid()).collection('characters').add({
-      NAME: character.name,
-      class : character.class
+      NAME: character.name
     })
   }
 

@@ -4,13 +4,18 @@ import '../../ComponentsView/Body.css'
 import { useAuth } from "../../context/AuthContext"
 import { useHistory } from "react-router-dom"
 import {Button} from "@material-ui/core"
+import { useDispatch, useSelector } from "react-redux"
+import CharacterCreating from "../CharacterCreating/CharacterCreating"
+import { openCharacterCreatingAction } from "../../store/actions/uiActions"
 
 export default function Signup() {
 
-  const { getCharacters, createCharacter } = useAuth()                     
+  const { getCharacters } = useAuth()                     
+  const history = useHistory()
   const [characters, setCharacters] = useState([])
   const [ loading, setLoading ] = useState(true);
-  const history = useHistory()
+  const isCharacterCreatingOpen = useSelector( state => state.ui.characterCreatingOpen)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     (
@@ -21,11 +26,6 @@ export default function Signup() {
       }
     )()
   }, []);
-
-  const addNewCharacter = () => {
-    
-    createCharacter()
-  }
 
   return(
     loading ? <div className ="justify-content-md-center">Loading...</div> : 
@@ -54,7 +54,8 @@ export default function Signup() {
             </h6>
           </div>
       </Card>})}
-      <Button onClick = {addNewCharacter}>+</Button>
+      <Button onClick = {() => dispatch(openCharacterCreatingAction())}>+</Button>
+      {isCharacterCreatingOpen && <CharacterCreating/>}
     </div>
   )
 }
