@@ -11,3 +11,9 @@ export function closeCharacterCreatingAction() {
         type: CHARACTER_CREATING_CLOSE
     }
 }
+
+export function setNewCharacterClass() {
+    return {
+        type: CHARACTER_CREATING_CLOSE
+    }
+}
